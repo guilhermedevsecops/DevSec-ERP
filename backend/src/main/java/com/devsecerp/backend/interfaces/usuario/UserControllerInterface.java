@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserControllerInterface {
 
     @PostMapping
-    ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO dto);
+    ResponseEntity<UserDTO> createUser(UserCreateDTO dto);
 
     @GetMapping("/{id}")
     ResponseEntity<UserDTO> getUserById(@PathVariable Integer id);
