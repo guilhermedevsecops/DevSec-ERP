@@ -24,10 +24,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    // Rotas públicas que não precisam de token
+    private static final String[] PUBLIC_URLS = { "/auth/login", "/auth/register" };
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+
+        String path = request.getServletPath();
+
+        // Ignora rotas públicas
+        for (String url : PUBLIC_URLS) {
+            if (path.equals(url)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+        }
 
         String authHeader = request.getHeader("Authorization");
         String token = null;
@@ -35,7 +48,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
-            username = jwtService.validateToken(token);
+            try {
+                username = jwtService.validateToken(token);
+            } catch (Exception e) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.getWriter().write("Token inválido ou expirado");
+                return;
+            }
+        } else {
+            // Nenhum token presente
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token não fornecido");
+            return;
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
