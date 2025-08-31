@@ -2,7 +2,8 @@ const PathRoutes = {
     commonPath : {
         login: "/",
         registration : "/registration",
-        notFound : "*"
+        notFound : "*",
+        forgotPassword: "/forgot-password"
     },
 
     protectedPath: {

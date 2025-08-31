@@ -24,41 +24,90 @@ body {
   flex-direction: column;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.2);
-  width: 30rem;
-  height: 30rem;
+  width: 25rem;
+  height: 34rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   border-radius: 8px;
-  padding: 0; /* remove padding para a imagem ir pro topo */
+  padding: 0;
+  justify-content: center;
+  
 }
 
 .imagem_logo {
   width: 100%;
+  height: 140px;
   display: flex;
-  justify-content: center; /* centraliza horizontalmente */
-  align-items: flex-start; /* garante que fique no topo */
-  margin-bottom: 1rem; /* espaçamento opcional entre imagem e formulário */
+  justify-content: center;  
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
 
 .imagem_logo img {
-  width: 202px;
-  height: 150px;
+  width: 200px;
+  height: auto;
 }
-.form_login{
-    width: 25rem;
 
+.form_login{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 66%;
 }
 
 .form_login input{
+    
     background-color: #9aa2b6;
-    height: 9px;
+    height: 2rem;
+    width: 27rem;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 9px;
+    border: none;
+    padding: 0.5rem;
+    
 
     
 }
 
 .form_login input.error{
      border-radius: 20px;
+}
+
+.container_checkbox{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  
+}
+
+.checkbox{
+  margin-left: 2rem;
+}
+
+.container_btn_logar button{
+  width: 20rem;
+  background-color: #0D0E2D;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.container_btn_cadastrar button{
+   width: 20rem;
+  background-color: #0D0E2D;
+  margin-bottom: 8px;
+  
+}
 
 
+.container_btn_cadastrar a{
+  color: white;
+  text-decoration: none;
+}
+
+
+
+.container_esqueci_senha a{
+  color : white;
+  text-decoration: underline;
 }

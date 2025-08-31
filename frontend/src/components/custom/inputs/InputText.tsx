@@ -20,14 +20,15 @@ const InputText: React.FC<InputProps> = ({ label, register, error, type = "text"
       fullWidth
       margin="normal"
       error={!!error}
-      helperText={error ? error.message : " "} // mantém altura do layout
+      helperText={error ? error.message : " "} 
       FormHelperTextProps={{
-        sx: { minHeight: "1.5em" },
+        sx: { minHeight: "1.5em", width: '20rem' },
       }}
       sx={{
         "& .MuiOutlinedInput-root": {
-          borderRadius: "20px",
-          height: "45px", // altura ajustada para ERP
+          borderRadius: "9px",
+          width: "21rem",
+          height: "45px", 
           padding: 0,
           "& input": {
             height: "100%",
