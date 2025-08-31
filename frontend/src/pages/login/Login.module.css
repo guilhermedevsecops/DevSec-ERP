@@ -1,0 +1,64 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url('../../assets/backgrounds/background-login.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.page_login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 30rem;
+  height: 30rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 0; /* remove padding para a imagem ir pro topo */
+}
+
+.imagem_logo {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: flex-start; /* garante que fique no topo */
+  margin-bottom: 1rem; /* espaçamento opcional entre imagem e formulário */
+}
+
+.imagem_logo img {
+  width: 202px;
+  height: 150px;
+}
+.form_login{
+    width: 25rem;
+
+}
+
+.form_login input{
+    background-color: #9aa2b6;
+    height: 9px;
+    align-items: center;
+    border-radius: 20px;
+
+    
+}
+
+.form_login input.error{
+     border-radius: 20px;
+
+
+}
