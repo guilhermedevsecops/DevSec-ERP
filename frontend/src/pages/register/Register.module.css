@@ -1,0 +1,161 @@
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 80rem;
+    height: 40rem;
+    margin: 0 auto;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.4);
+    
+}
+
+.title{
+
+    color: white;
+    padding: 0 2rem;
+
+}
+
+.lineOneForm{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding : 0 0.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.lineOneForm .input{
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 24rem;
+}
+
+.lineOneForm .input input{
+    height: 5rem;
+    border-radius: 10px;
+}
+
+.lineTwoForm{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding : 0 0.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+   
+}
+
+.selectCamp{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+    width: 25rem;
+    margin-left: 22px;
+    
+    
+}
+
+
+.selectCustom{
+    width: 24rem;
+}
+
+
+.lineTwoForm .input{
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 24rem;
+}
+
+.lineTwoForm .input input{
+    height: 5rem;
+    border-radius: 10px;
+}
+
+
+.lineThreeForm{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding : 0 0.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.lineThreeForm .address{
+    
+    margin-left: 1.4rem;
+}
+
+.lineThreeForm input{
+    width: 74.5rem;
+}
+
+.lineFourForm{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding : 0 1rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.lineFourForm .div{
+     padding : 0 .7rem;
+     width: 24rem;
+}
+
+.lineFiveForm{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding : 0 2rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.lineFiveForm .emailInput{
+    width: 74.5rem;
+}
+
+.Buttons{
+    display: flex;
+    flex-direction: row;
+}
+
+.Buttons button{
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+    width: 25rem;
+    height: 50px;
+    border-radius: 90px;
+    background-color: #0D0E2D;
+    margin-bottom: 8px;
+}
