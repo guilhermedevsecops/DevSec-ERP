@@ -7,12 +7,14 @@ interface InputProps {
   register: UseFormRegisterReturn;
   error?: FieldError;
   type?: string;
+  className? : string;
 }
 
-const InputText: React.FC<InputProps> = ({ label, register, error, type = "text" }) => {
+const InputText: React.FC<InputProps> = ({ className, label, register, error, type = "text" }) => {
   return (
     <TextField
       {...register}
+      className={className}
       type={type}
       label={label}
       placeholder={label}
@@ -27,7 +29,7 @@ const InputText: React.FC<InputProps> = ({ label, register, error, type = "text"
       sx={{
         "& .MuiOutlinedInput-root": {
           borderRadius: "9px",
-          width: "21rem",
+          background: "#D9D9D9",
           height: "45px", 
           padding: 0,
           "& input": {
@@ -40,23 +42,24 @@ const InputText: React.FC<InputProps> = ({ label, register, error, type = "text"
             fontSize: "14px",
           },
           "& fieldset": {
-            borderColor: error ? "red" : "#B0B0B0",
+            borderColor: error ? "red" : "black",
             borderWidth: error ? 2 : 1,
           },
           "&.Mui-focused fieldset": {
-            borderColor: error ? "red" : "#1976d2",
+            borderColor: error ? "red" : "white",
           },
         },
         "& .MuiInputLabel-root": {
-          color: "#333",
-          fontSize: "14px",
+          color: "black",
+          fontSize: "15px",
         },
         "& .MuiInputLabel-root.Mui-focused": {
-          color: "white",
+          color: "black",
         },
         "& input::placeholder": {
-          color: "#999",
-          opacity: 1,
+          color: "rgba(34, 76, 192, 1)",
+          fontSize: "20px",
+          opacity: 0,
         },
       }}
     />
