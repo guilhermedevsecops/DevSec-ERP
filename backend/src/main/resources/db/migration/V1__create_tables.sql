@@ -3,14 +3,18 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
-    name VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    function VARCHAR(50),
+    function VARCHAR(50) NOT NULL,
+    departament VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
     last_login TIMESTAMP,
     city VARCHAR(50),
     state CHAR(2),
     address VARCHAR(100),
+    cep VARCHAR(40),
+    logadouro varchar(40),
+    referencia varchar(40),
     email VARCHAR(100) UNIQUE NOT NULL
 );
 
@@ -58,12 +62,28 @@ CREATE TABLE role_action (
     FOREIGN KEY(action_id) REFERENCES actions(id) ON DELETE CASCADE
 );
 
+CREATE TABLE functions (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    departament_id INT NOT NULL REFERENCES departament(id)
+);
+
+
 -- TABELAS USUARIO DEPARTAMENTO
 
-CREATE TABLE user_departament (
+CREATE TABLE users_departament (
     user_id INT NOT NULL,
     departament_id INT NOT NULL,
     PRIMARY KEY(user_id, departament_id),
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY(departament_id) REFERENCES departament(id) ON DELETE CASCADE
+);
+
+CREATE TABLE endpoints_api (
+    id SERIAL PRIMARY KEY,
+    api_application VARCHAR(80) NOT NULL,   
+    url VARCHAR(255) NOT NULL,              
+    username VARCHAR(80),          
+    password_encrypted TEXT,       
+    ativo BOOLEAN DEFAULT TRUE
 );
