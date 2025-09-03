@@ -2,8 +2,6 @@ package com.devsecerp.backend.entity.usuario;
 
 import java.time.LocalDate;
 
-import org.springframework.stereotype.Repository;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,9 +22,11 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
-    private String name;
+    @Column(name = "first_name")
+    private String firstname;
     @Column(name = "last_name")
-    private String lastName;
+    private String lastname;
+    private String departament;
     private String function;
     private String password;
     @Column(name = "last_login")
@@ -35,4 +35,7 @@ public class Users {
     private String state;
     private String address;
     private String email;
+    private String cep;
+    private String logadouro;
+    private String referencia;
 }

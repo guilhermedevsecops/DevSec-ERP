@@ -17,7 +17,7 @@ import com.devsecerp.backend.interfaces.usuario.UserControllerInterface;
 import com.devsecerp.backend.services.usuario.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/register")
 public class UserController implements UserControllerInterface{
 
     @Autowired
