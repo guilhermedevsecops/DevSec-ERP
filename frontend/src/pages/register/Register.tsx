@@ -1,20 +1,20 @@
 import React from 'react';
 import style from './Register.module.css';
 import InputText from '../../components/custom/inputs/InputText';
-import { registerSchema } from "../../validators/registerSchema";
-import { useAppForm } from '../../hooks/useForm/useAppForm';
+import { showError, showSuccess } from "../../utils/toast";
 import CustomSelect from '../../components/custom/select/CustomSelect';
 import { useForm } from 'react-hook-form';
 import { Button } from '@mui/material';
+import { RegisterService } from '../../services/User/UserService';
 
 const Register = () => {
 
   interface RegisterFormInputs {
-    userName: string;
-    firstName: string;
-    lastName: string;
-    enterpriseName: string;
-    functionType: string;
+    username: string;
+    firstname: string;
+    lastname: string;
+    enterpriseName?: string;
+    function: string;
     departament: string;
     address: string;
     city: string;
@@ -27,12 +27,37 @@ const Register = () => {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<RegisterFormInputs>({
     defaultValues: {
-      departament: "recepção",
+    username: "",
+    firstname: "",
+    lastname: "",
+    departament: "recepcao", 
+    function: "financeiro",
+    address: "",
+    city: "",
+    state: "",
+    email: "",
+    password: ""
     },
   });
+
+  const onSubmit = async (data: RegisterFormInputs) => {
+    try{
+      console.log(data)
+      const response = await RegisterService(data);
+      //console.log("Iniciando....", response)
+      
+      showSuccess("Usuário criado com sucesso!", true);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    }catch(error : any){
+      showError("Erro ao efetuar o cadastro, por favor tente novamente", false);
+
+    }
+  }
 
   return (
     <div>
@@ -40,15 +65,15 @@ const Register = () => {
         <div className={style.title}>
           <h1>Cadastro</h1>
         </div>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className={style.lineOneForm}>
             <div>
               <InputText
                 className={style.input}
                 label="Nome de Usuário"
                 type="text"
-                register={register("userName")}
-                error={errors.userName}
+                register={register("username")}
+                error={errors.username}
               />
             </div>
             <div>
@@ -56,8 +81,8 @@ const Register = () => {
                 className={style.input}
                 label="Primeiro Nome"
                 type="text"
-                register={register("userName")}
-                error={errors.userName}
+                register={register("firstname")}
+                error={errors.firstname}
               />
             </div>
             <div>
@@ -65,8 +90,8 @@ const Register = () => {
                 className={style.input}
                 label="Sobrenome"
                 type="text"
-                register={register("userName")}
-                error={errors.userName}
+                register={register("lastname")}
+                error={errors.lastname}
               />
             </div>
           </div>
@@ -77,35 +102,40 @@ const Register = () => {
                 className={style.input}
                 label="Nome Empresa"
                 type="text"
-                register={register("userName")}
-                error={errors.userName}
+                register={register("enterpriseName")}
+                error={errors.enterpriseName}
               />
             </div>
 
             <div className={style.selectCamp}>
               <div className={style.selectCustom}>
                 <CustomSelect
-                  label="Funcao"
-                  register={register("departament")}
-                  error={errors.departament}
-                  options={[
-                    { value: "recepcao", label: "Recepcao" },
-                    { value: "financeiro", label: "Financeiro" },
-                    { value: "rh", label: "Recursos Humanos" }
-                  ]}
-                />
+  label="Departamento"
+  name="departament"
+  control={control}
+  error={errors.departament}
+  options={[
+    { value: "financeiro", label: "Financeiro" },
+    { value: "contabilidade", label: "Analista Contabil" },
+    { value: "rh", label: "Analista de Recursos Humanos" },
+  ]}
+  defaultValue="financeiro"
+/>
+
               </div>
               <div className={style.selectCamp}>
                 <CustomSelect
-                  label="Departamento"
-                  register={register("departament")}
-                  error={errors.departament}
-                  options={[
-                    { value: "financeiro", label: "Financeiro" },
-                    { value: "contabilidade", label: "Analista Contabil" },
-                    { value: "rh", label: "Analista de Recursos Humanos" }
-                  ]}
-                />
+  label="Função"
+  name="function"
+  control={control}
+  error={errors.function}
+  options={[
+    { value: "financeiro2", label: "Financeiro" },
+    { value: "contabilidade1", label: "Analista Contabil" },
+    { value: "rh3", label: "Analista de Recursos Humanos" },
+  ]}
+  defaultValue="financeiro"
+/>
               </div>
             </div>
           </div>
@@ -166,7 +196,7 @@ const Register = () => {
               </Button>
             </div>
             <div>
-              <Button variant="contained" type="submit">
+              <Button variant="contained">
                 Esqueci Minha Senha
               </Button>
             </div>
