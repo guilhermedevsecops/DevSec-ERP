@@ -1,48 +1,47 @@
 import React from "react";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import { Controller, Control, FieldError } from "react-hook-form";
 
 interface CheckBoxProps {
+  name: string;
   label: string;
-  register?: UseFormRegisterReturn; // opcional
+  control: Control<any>;
   error?: FieldError;
-  defaultChecked?: boolean; // ✅ para marcar inicialmente
+  className?: string;
+  onClick?: (checked: boolean) => void; // Apenas o valor do checkbox
 }
 
-const CustomCheckBox: React.FC<CheckBoxProps> = ({ label, register, error, defaultChecked }) => {
+const CustomCheckBox: React.FC<CheckBoxProps> = ({
+  name,
+  label,
+  control,
+  error,
+  className,
+  onClick,
+}) => {
   return (
-    <div>
-      <FormControlLabel
-        control={
-          <Checkbox
-            {...(register ?? {})}
-            defaultChecked={defaultChecked} // ✅ valor inicial
-            sx={{
-              color: "white",
-              "&.Mui-checked": {
-                color: "white",
-                borderRadius: "4px",
-              },
-              "&:hover": {
-                backgroundColor: "rgba(25, 118, 210, 0.1)",
-              },
-            }}
+    <div className={className}>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={field.value}
+                onChange={(e) => {
+                  const checked = e.target.checked;
+                  field.onChange(checked); // Atualiza o estado
+                  if (onClick) onClick(checked); // Chama o onClick com o valor do checkbox
+                }}
+              />
+            }
+            label={label}
           />
-        }
-        label={label}
-        sx={{
-          ".MuiFormControlLabel-label": {
-            fontSize: "14px",
-            color: error ? "red" : "#b3a5a5ff",
-          },
-        }}
+        )}
       />
-      {error && (
-        <span style={{ color: "red", fontSize: "12px", marginLeft: "8px" }}>
-          {error.message}
-        </span>
-      )}
+      {error && <span className="checkbox-error">{error.message}</span>}
     </div>
   );
 };

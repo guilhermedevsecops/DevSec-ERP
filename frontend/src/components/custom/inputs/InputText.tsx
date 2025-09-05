@@ -7,10 +7,16 @@ interface InputProps {
   register: UseFormRegisterReturn;
   error?: FieldError;
   type?: string;
-  className? : string;
+  className?: string;
 }
 
-const InputText: React.FC<InputProps> = ({ className, label, register, error, type = "text" }) => {
+const InputText: React.FC<InputProps> = ({
+  className,
+  label,
+  register,
+  error,
+  type = "text",
+}) => {
   return (
     <TextField
       {...register}
@@ -22,44 +28,41 @@ const InputText: React.FC<InputProps> = ({ className, label, register, error, ty
       fullWidth
       margin="normal"
       error={!!error}
-      helperText={error ? error.message : " "} 
+      helperText={error ? error.message : " "}
       FormHelperTextProps={{
-        sx: { minHeight: "1.5em", width: '20rem' },
+        sx: { minHeight: "1.5em" },
       }}
       sx={{
+        color: "black",
+        fontSize : "12px",
         "& .MuiOutlinedInput-root": {
-          borderRadius: "9px",
-          background: "#D9D9D9",
-          height: "45px", 
-          padding: 0,
-          "& input": {
-            height: "100%",
-            padding: "0 12px", // padding horizontal ajustado
-            boxSizing: "border-box",
-            display: "flex",
-            alignItems: "center", // centraliza verticalmente
-            color: "#000",
-            fontSize: "14px",
-          },
+          backgroundColor: "#c2c2c9ff", 
           "& fieldset": {
-            borderColor: error ? "red" : "black",
-            borderWidth: error ? 2 : 1,
+            borderColor: "0099c0ff",
           },
           "&.Mui-focused fieldset": {
-            borderColor: error ? "red" : "white",
+            borderColor: "0099c0ff",
+          },
+          "& input:-webkit-autofill": {
+            WebkitBoxShadow: "0 0 0 1000px white inset !important", 
+            WebkitTextFillColor: "black !important", 
+            height: "1.5em",
+            padding: "0 14px",
           },
         },
-        "& .MuiInputLabel-root": {
-          color: "black",
-          fontSize: "15px",
-        },
         "& .MuiInputLabel-root.Mui-focused": {
-          color: "black",
+          color: "#0099c0ff",
+          fontWeight : "bolder",
         },
-        "& input::placeholder": {
-          color: "rgba(34, 76, 192, 1)",
-          fontSize: "20px",
-          opacity: 0,
+        "& .MuiInputLabel-root.MuiInputLabel-shrink": {
+          color: "black",
+          fontWeight : "bolder",
+          paddingBottom: "20px",
+          
+          
+          
+          
+          
         },
       }}
     />
