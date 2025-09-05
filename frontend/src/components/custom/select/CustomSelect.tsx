@@ -42,35 +42,18 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           fullWidth
           className={className}
           margin="normal"
+          error={!!error}
           sx={{
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "9px",
-              width: "24rem",
-              height: "45px",
-              "& .MuiSelect-select": {
-                display: "flex",
-                alignItems: "center",
-                padding: "0 12px",
-                fontSize: "14px",
-                background: "white",
-                color: "white",
-              },
-              "& fieldset": {
-                borderColor: error ? "red" : "black",
-                borderWidth: error ? 2 : 1,
-                background: "white",
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: error ? "red" : "#1976d2",
-                background: "black",
-              },
-            },
+           
             "& .MuiInputLabel-root": {
-              color: "white",
-              fontSize: "14px",
+              color: "black", 
             },
-            "& .MuiInputLabel-root.Mui-focused": {
-              color: "white",
+            "& .MuiSelect-root": {
+              color: "black", 
+              background : "#c2c2c9ff"
+            },
+            "& .MuiFormHelperText-root": {
+              color: "black",
             },
           }}
         >

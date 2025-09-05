@@ -19,7 +19,6 @@ interface UserPayload{
 }
 
 export const RegisterService = async(payload : UserPayload) => {
-      console.log("PAYLOAD" , payload)
     try{
         const response = await api.post("/register", payload);
         return response.data;

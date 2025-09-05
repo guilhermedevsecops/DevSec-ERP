@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppForm } from "../../hooks/useForm/useAppForm";
 import { loginSchema } from "../../validators/loginSchema";
-import InputText from "../../components/custom/inputs/InputText";
+import InputText from '../../components/custom/inputs/InputText';
 import { AuthService } from "../../services/AuthService";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -9,7 +9,7 @@ import { showError, showSuccess } from "../../utils/toast";
 import { setToken } from "../../config/redux/AuthSlice";
 import { ToastContainer } from "react-toastify";
 import style from "./Login.module.css";
-import Logo from "../../assets/logo/logo-devsec-erp.svg";
+import Logo from "../../assets/logo/logo-devsec-erp-preta.png";
 import { Button, Checkbox } from "@mui/material";
 import CustomCheckBox from "../../components/custom/checkbox/CustomCheckBox";
 import PathRoutes from "../../config/RoutesPath";
@@ -22,11 +22,19 @@ interface LoginFormInputs {
 
 const Login = () => {
   const {
+    control,
     register,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors },
-  } = useAppForm<LoginFormInputs>(loginSchema);
+  } = useAppForm<LoginFormInputs>(loginSchema, {
+    defaultValues: {
+      email: localStorage.getItem("rememberEmail") || "",
+      password: localStorage.getItem("rememberPassword") || "",
+      rememberMe: localStorage.getItem("rememberMe") === "true"
+    },
+  });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,26 +42,36 @@ const Login = () => {
   useEffect(() => {
     const savedEmail = localStorage.getItem("rememberEmail");
     const savedPassword = localStorage.getItem("rememberPassword");
+    const savedRememberMe = localStorage.getItem("rememberMe") === "true";
 
-    if (savedEmail && savedPassword) {
+    setValue("rememberMe", savedRememberMe);
+
+    if (savedEmail && savedPassword && savedRememberMe) {
       setValue("email", savedEmail);
       setValue("password", savedPassword);
-      setValue("rememberMe", true);
     }
   }, [setValue]);
+  
+  const onSavedInfoLogin = (checked: boolean) => {
+
+    const {email, password} = getValues()
+
+    if (checked) {
+        localStorage.setItem("rememberEmail", email);
+        localStorage.setItem("rememberPassword", password);
+        localStorage.setItem("rememberMe", "true");
+    }else{ 
+        localStorage.removeItem("rememberEmail");
+        localStorage.removeItem("rememberPassword");
+        localStorage.removeItem("rememberMe");
+    }
+
+  }
 
   const onSubmit = async (data: LoginFormInputs & { rememberMe: boolean }) => {
     try {
       const response = await AuthService(data);
-      if (data.rememberMe) {
-        localStorage.setItem("rememberEmail", data.email);
-        localStorage.setItem("rememberPassword", data.password);
-        localStorage.setItem("rememberMe", "true");
-      } else {
-        localStorage.removeItem("rememberEmail");
-        localStorage.removeItem("rememberPassword");
-        localStorage.removeItem("rememberMe");
-      }
+      
 
       if (response?.token) {
         dispatch(setToken(response.token));
@@ -72,32 +90,36 @@ const Login = () => {
     <div className={style.page_login}>
       <ToastContainer />
       <div className={style.container}>
-        <div className={style.imagem_logo}>
-          <img src={Logo} />
+        <div className={style.imagem_logo}> 
+          <img style={{ color: "red" }} src={Logo} />
         </div>
-        <form className={style.form_login} onSubmit={handleSubmit(onSubmit)}>
-          <div className={style.input_email}>
+        <form className={style.form_login} onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+          <div>
             <InputText
+              className={style.InputText}
               label="Email"
               register={register("email")}
               error={errors.email}
             />
           </div>
-          <div className={style.input_password}>
+          <div>
             <InputText
+              className={style.InputText}
               label="Senha"
               type="password"
-              register={register("password")}
+                register={register("password")}
               error={errors.password}
             />
           </div>
           <div className={style.container_checkbox}>
             <div className={style.checkbox}>
               <CustomCheckBox
-                label="Lembrar Minha Senha"
-                register={register("rememberMe")}
-                error={errors.rememberMe}
-                defaultChecked={localStorage.getItem("rememberMe") === "true"} 
+                  name="rememberMe"      
+                  label="Lembrar Minha Senha"
+                  control={control}
+                  error={errors.rememberMe} 
+                  className={style.checkbox}
+                  onClick={onSavedInfoLogin}
               />
             </div>
           </div>

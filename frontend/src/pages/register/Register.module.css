@@ -9,17 +9,18 @@ body {
     display: flex;
     flex-direction: column;
     width: 80rem;
-    height: 40rem;
+    height: 43rem;
     margin: 0 auto;
     padding: 0;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: white;
     
 }
 
 .title{
 
-    color: white;
+    color: rgb(6, 2, 37);
     padding: 0 2rem;
+    text-decoration: underline;
 
 }
 
@@ -34,44 +35,51 @@ body {
     width: 100%;
 }
 
-.lineOneForm .input{
+.lineOneForm .input {
     margin-left: 20px;
     justify-content: center;
     align-items: center;
     width: 24rem;
 }
 
-.lineOneForm .input input{
-    height: 5rem;
-    border-radius: 10px;
+.lineOneForm .input label .container{
+    color: green;
+    
 }
+
+
 
 .lineTwoForm{
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding : 0 0.5rem;
+    padding-left : 2rem;
     display: flex;
     flex-direction: row;
     width: 100%;
    
 }
 
+
+
+.inputEnterprise div{
+    width: 35rem;
+}
+
 .selectCamp{
     display: flex;
     flex-direction: row;
     margin-left: 20px;
-    width: 25rem;
+    width:37.7rem;
     margin-left: 22px;
-    color: white;
     
     
 }
 
 
 .selectCustom{
-    width: 24rem;
+    width: 40rem;
 }
 
 
@@ -88,29 +96,9 @@ body {
 }
 
 
+
+
 .lineThreeForm{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding : 0 0.5rem;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-}
-
-.lineThreeForm .address{
-    
-    margin-left: 1.4rem;
-}
-
-.lineThreeForm input{
-    width: 74.5rem;
-}
-
-.lineFourForm{
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -123,9 +111,36 @@ body {
     width: 100%;
 }
 
-.lineFourForm .div{
-     padding : 0 .7rem;
-     width: 24rem;
+.lineThreeForm .div{
+     padding-left : 1.1rem;
+     
+}
+
+.lineThreeForm .div div{
+    width: 17.7rem;
+    
+}
+
+.lineFourForm{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding : 0 0.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.lineFourForm .address{
+    
+    margin-left: 1.5rem;
+}
+
+.lineFourForm input{
+    width: 72.4rem;
 }
 
 .lineFiveForm{
