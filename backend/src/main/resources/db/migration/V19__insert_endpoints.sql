@@ -1,0 +1,1 @@
+INSERT INTO endpoints_api (api_application, url, username, password_encrypted, ativo) VALUES ( 'ViaCEP', 'https://viacep.com.br/ws/', NULL, NULL, true);

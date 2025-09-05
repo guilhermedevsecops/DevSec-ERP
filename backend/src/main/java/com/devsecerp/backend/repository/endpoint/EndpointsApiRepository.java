@@ -1,6 +1,7 @@
 package com.devsecerp.backend.repository.endpoint;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.devsecerp.backend.entity.endpoint.EndpointsApi;
 

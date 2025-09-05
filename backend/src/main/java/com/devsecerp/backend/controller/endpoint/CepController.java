@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/cep")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CepController {
 
     private final ViaCepService apiConfigService;
@@ -24,6 +25,7 @@ public class CepController {
     @GetMapping("/{cep}")
     public CepResponse getCep(@PathVariable String cep) {
         String url = apiConfigService.getUrl("ViaCEP", cep + "/json/");
+        System.out.println(url);
         return restTemplate.getForObject(url, CepResponse.class);
     }
 }

@@ -24,8 +24,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    // Rotas públicas que não precisam de token
-    private static final String[] PUBLIC_URLS = { "/auth/login", "/register" };
+    private static final String[] PUBLIC_URLS = { "/auth/login", "/register", "/api" }; 
+                                                     
+                                                    
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -36,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         // Ignora rotas públicas
         for (String url : PUBLIC_URLS) {
-            if (path.equals(url)) {
+            if (path.startsWith(url)) {
                 filterChain.doFilter(request, response);
                 return;
             }
