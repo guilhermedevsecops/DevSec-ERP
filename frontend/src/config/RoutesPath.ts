@@ -3,7 +3,8 @@ const PathRoutes = {
         login: "/",
         registration : "/registration",
         notFound : "*",
-        forgotPassword: "/forgot-password"
+        forgotPassword: "/forgot-password",
+        resetPassword: "/reset-password/:token"
     },
 
     protectedPath: {

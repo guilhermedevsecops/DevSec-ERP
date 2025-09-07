@@ -3,6 +3,7 @@ body {
   place-items: center;
   height: 100vh;
   margin: 0;
+  width: 100%;
 }
 
 .container{
@@ -174,4 +175,9 @@ body {
     border-radius: 90px;
     background-color: #0D0E2D;
     margin-bottom: 8px;
+}
+
+.Buttons button a{
+    text-decoration: none;
+    color: white;
 }

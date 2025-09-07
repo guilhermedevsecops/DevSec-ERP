@@ -4,6 +4,11 @@ html, body, #root {
   padding: 0;
 }
 
+.no-autofill:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px black inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
 body {
   background-image: url('../../assets/backgrounds/background-login.svg');
   background-size: cover;
@@ -104,7 +109,7 @@ body {
   padding-bottom: 40px;
 }
 
-.container_esqueci_senha a{
+.container_esqueci_senha{
   color : blue;
   text-decoration: underline;
 }
