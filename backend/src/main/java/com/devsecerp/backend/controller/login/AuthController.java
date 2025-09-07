@@ -25,7 +25,6 @@ public class AuthController {
     @PostMapping("/forgot-password")
 public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
     try {
-        System.out.println("Cheguei aqui");
         resetService.requestReset(request.getEmail());
         return ResponseEntity.ok("Você receberá instruções para redefinição de sua senha");
     } catch (Exception e) {
@@ -42,7 +41,6 @@ public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest reque
 
 @PostMapping("/reset-password")
 public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
-    System.out.println("AQUI ESTOU =======================================");
     boolean valid = resetService.isTokenValid(request.getToken()); 
     if (!valid) {
         return ResponseEntity.badRequest().body("Token inválido ou expirado");
