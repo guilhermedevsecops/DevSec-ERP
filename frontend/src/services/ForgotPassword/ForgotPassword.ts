@@ -2,12 +2,12 @@ import axios from "axios";
 import api from "../../config/axios";
 
 interface CepPayload{
-    cep : string;
+    email : string;
 }
 
-export const getAddressByCep = async(payload : CepPayload) => {
+export const ForgotPasswordRequest = async(payload : CepPayload) => {
       try{
-        const response = await api.get(`/api/cep/${payload.cep}`);
+        const response = await api.post("/auth/forgot-password", payload);
         return response.data;
     }catch (error: unknown) {
   if (axios.isAxiosError(error)) {

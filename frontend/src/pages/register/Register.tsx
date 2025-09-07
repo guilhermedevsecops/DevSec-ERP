@@ -7,6 +7,11 @@ import { useForm } from "react-hook-form";
 import { Button } from "@mui/material";
 import { RegisterService } from "../../services/User/UserService";
 import { getAddressByCep } from "../../services/viaCep/GetAddressByCep";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import PathRoutes from '../../config/RoutesPath';
+import { registerSchema } from "../../validators/registerSchema";
+import { useAppForm } from "../../hooks/useForm/useAppForm";
+import { ToastContainer } from "react-toastify";
 
 const Register = () => {
   interface RegisterFormInputs {
@@ -32,7 +37,7 @@ const Register = () => {
     watch,
     control,
     formState: { errors },
-  } = useForm<RegisterFormInputs>({
+  } = useAppForm<RegisterFormInputs>(registerSchema, {
     defaultValues: {
       username: "",
       firstname: "",
@@ -49,13 +54,24 @@ const Register = () => {
   });
 
   const cepValue = watch("cep"); 
+  const navigate = useNavigate();
+
+  const LoginButtons = () => {
+        navigate(PathRoutes.commonPath.login)
+  }
 
   const onSubmit = async (data: RegisterFormInputs) => {
+    console.log("Entrei aqui")
     try {
       console.log(data);
       const response = await RegisterService(data);
-      showSuccess("Usuário criado com sucesso!", true);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      if(!response){
+        showError("Erro ao cadastrar usuário", true);
+      }else{
+        showSuccess("Usuário criado com sucesso!", true);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        navigate(PathRoutes.commonPath.login)
+      }
     } catch (error: any) {
       showError("Erro ao efetuar o cadastro, por favor tente novamente", false);
     }
@@ -63,7 +79,7 @@ const Register = () => {
 
   useEffect(() => {
   const fetchAddress = async () => {
-    const cepOnlyNumbers = cepValue.replace(/\D/g, ""); // remove tudo que não é número
+    const cepOnlyNumbers = cepValue.replace(/\D/g, ""); 
     if (cepOnlyNumbers.length === 8) {
       try {
         const addressData = await getAddressByCep({ cep: cepOnlyNumbers });
@@ -83,6 +99,7 @@ const Register = () => {
 
   return (
     <div>
+      <ToastContainer/>
       <div className={style.container}>
         <div className={style.title}>
           <h1>Cadastro</h1>
@@ -174,6 +191,7 @@ const Register = () => {
               <InputText
                 className={style.input}
                 label="Cidade"
+                value={watch("city") || ""}
                 register={register("city")}
                 error={errors.city}
               />
@@ -182,6 +200,7 @@ const Register = () => {
               <InputText
                 className={style.input}
                 label="Estado"
+                value={watch("state") || ""}
                 register={register("state")}
                 error={errors.state}
               />
@@ -201,6 +220,7 @@ const Register = () => {
               <InputText
                 className={style.input}
                 label="Endereço"
+                value={watch("address") || ""}
                 register={register("address")}
                 error={errors.address}
               />
@@ -220,12 +240,16 @@ const Register = () => {
 
           <div className={style.Buttons}>
             <div>
-              <Button variant="contained" type="submit">
+              <Button 
+                variant="contained" type="submit">
+                  
                 Cadastrar
               </Button>
             </div>
             <div>
-              <Button variant="contained">Login</Button>
+              <Button onClick={LoginButtons}>
+                  Login aqui
+              </Button>
             </div>
           </div>
         </form>

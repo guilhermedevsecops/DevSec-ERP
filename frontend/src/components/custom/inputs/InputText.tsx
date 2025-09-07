@@ -8,6 +8,7 @@ interface InputProps {
   error?: FieldError;
   type?: string;
   className?: string;
+  value?: string;
 }
 
 const InputText: React.FC<InputProps> = ({
@@ -16,6 +17,7 @@ const InputText: React.FC<InputProps> = ({
   register,
   error,
   type = "text",
+  value
 }) => {
   return (
     <TextField
@@ -28,41 +30,46 @@ const InputText: React.FC<InputProps> = ({
       fullWidth
       margin="normal"
       error={!!error}
+      value={value}
+      autoComplete="new-password"  // 🔹 mais confiável que "off"
       helperText={error ? error.message : " "}
       FormHelperTextProps={{
         sx: { minHeight: "1.5em" },
       }}
       sx={{
         color: "black",
-        fontSize : "12px",
+        fontSize: "12px",
         "& .MuiOutlinedInput-root": {
-          backgroundColor: "#c2c2c9ff", 
+          backgroundColor: "#c2c2c9ff",
           "& fieldset": {
-            borderColor: "0099c0ff",
+            borderColor: "#0099c0ff",
           },
           "&.Mui-focused fieldset": {
-            borderColor: "0099c0ff",
+            borderColor: "#0099c0ff",
           },
+          // 🔹 Autofill do navegador
           "& input:-webkit-autofill": {
-            WebkitBoxShadow: "0 0 0 1000px white inset !important", 
-            WebkitTextFillColor: "black !important", 
-            height: "1.5em",
-            padding: "0 14px",
+            WebkitBoxShadow: "0 0 0 1020px #c2c2c9ff inset !important",
+            WebkitTextFillColor: "black !important",
+          },
+          "& input:-webkit-autofill:hover": {
+            WebkitBoxShadow: "0 0 0 1000px #c2c2c9ff inset !important",
+          },
+          "& input:-webkit-autofill:focus": {
+            WebkitBoxShadow: "0 0 0 1000px #c2c2c9ff inset !important",
+          },
+          "& input:-webkit-autofill:active": {
+            WebkitBoxShadow: "0 0 0 1000px #c2c2c9ff inset !important",
           },
         },
         "& .MuiInputLabel-root.Mui-focused": {
           color: "#0099c0ff",
-          fontWeight : "bolder",
+          fontWeight: "bolder",
         },
         "& .MuiInputLabel-root.MuiInputLabel-shrink": {
           color: "black",
-          fontWeight : "bolder",
+          fontWeight: "bolder",
           paddingBottom: "20px",
-          
-          
-          
-          
-          
         },
       }}
     />

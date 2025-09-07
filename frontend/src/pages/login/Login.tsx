@@ -39,6 +39,17 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const NavigatorButtons = (value : string) => {
+    switch(value){
+      case "cadastrar":
+        navigate(PathRoutes.commonPath.registration);
+        break;
+      case "esqueci":
+        navigate(PathRoutes.commonPath.forgotPassword);
+        break;
+    }
+  }
+
   useEffect(() => {
     const savedEmail = localStorage.getItem("rememberEmail");
     const savedPassword = localStorage.getItem("rememberPassword");
@@ -129,18 +140,15 @@ const Login = () => {
             </Button>
           </div>
           <div className={style.container_btn_cadastrar}>
-            <Button variant="contained" >
-              <NavLink to={PathRoutes.commonPath.registration}>Cadastrar</NavLink>
+            <Button 
+              variant="contained"
+              onClick={()=>NavigatorButtons("cadastrar")}>
+              Cadastrar
             </Button>
           </div>
         </form>
         <div className={style.container_esqueci_senha}>
-          <NavLink
-            className={style.esqueci_senha}
-            to={PathRoutes.commonPath.forgotPassword}
-          >
-            Esqueci Minha Senha
-          </NavLink>
+            <p onClick={()=>NavigatorButtons("esqueci")}>Esqueci Minha Senha</p>
         </div>
       </div>
     </div>
