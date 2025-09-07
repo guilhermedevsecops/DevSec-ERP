@@ -1,6 +1,7 @@
 package com.devsecerp.backend.dto.usuario;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +26,5 @@ public class UserDTO {
     private String state;
     private String address;
     private String email;
+
 }

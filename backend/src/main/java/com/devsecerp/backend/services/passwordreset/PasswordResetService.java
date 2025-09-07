@@ -55,7 +55,6 @@ public class PasswordResetService {
     
         try {
             resetMailSender.sendPasswordResetEmail(user.getEmail(), token);
-            System.out.println("Email de redefinição enviado para: " + user.getEmail());
         } catch (Exception e) {
             System.out.println("Falha ao enviar email: " + e.getMessage());
             e.printStackTrace();
@@ -65,7 +64,6 @@ public class PasswordResetService {
 
 
     public void resetPassword(String token, String newPassword) {
-        System.out.println("================= aqui");
         PasswordResetToken prt = tokenRepository.findByToken(token)
                 .orElseThrow(() -> new IllegalArgumentException("Token inválido"));
 
