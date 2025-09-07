@@ -87,3 +87,15 @@ CREATE TABLE endpoints_api (
     password_encrypted TEXT,       
     ativo BOOLEAN DEFAULT TRUE
 );
+
+--Tabela para reset de password
+
+CREATE TABLE password_reset_tokens (
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL,
+  token VARCHAR(255) NOT NULL UNIQUE,
+  expires_at TIMESTAMP NOT NULL,
+  used BOOLEAN NOT NULL DEFAULT FALSE,
+  email VARCHAR(255) NOT NULL,
+  CONSTRAINT fk_user_password_reset FOREIGN KEY (user_id) REFERENCES users(id)
+);
