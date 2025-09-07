@@ -1,0 +1,117 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.no-autofill:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px black inset !important;
+  -webkit-text-fill-color: black !important;
+}
+
+body {
+  background-image: url('../../assets/backgrounds/background-login.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.page_login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 25rem;
+  height: 36rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 0;
+  justify-content: center;
+  
+}
+
+.imagem_logo {
+  width: 100%;
+  height: 140px;
+  
+  display: flex;
+  justify-content: center;  
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.imagem_logo img {
+  width: 200px;
+  height: auto;
+}
+
+.form_login{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 68%;
+  margin-bottom:30px;
+}
+
+.InputText div{
+    
+    height: 3rem;
+    width: 20rem;
+    align-items: center;
+    border-radius: 9px;
+    border: none;
+    padding: 0.5rem;
+}
+
+
+.container_checkbox{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-left: 1rem; 
+}
+
+.checkbox{
+  margin-left: 2rem;
+}
+
+.container_btn_logar button{
+  width: 20rem;
+  background-color: #0D0E2D;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.container_btn_cadastrar button{
+   width: 20rem;
+  background-color: #0D0E2D;
+  margin-bottom: 8px;
+  
+}
+
+
+.container_btn_cadastrar a{
+  color: white;
+  text-decoration: none;
+}
+
+.container_esqueci_senha{
+  padding-bottom: 40px;
+}
+
+.container_esqueci_senha{
+  color : blue;
+  text-decoration: underline;
+}
+
+
