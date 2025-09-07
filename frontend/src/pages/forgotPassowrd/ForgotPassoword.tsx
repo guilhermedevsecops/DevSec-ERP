@@ -32,8 +32,14 @@ const ForgotPassoword = () => {
       if (data.email === "") {
         showError("Email não pode estar vazio", true);
       } else {
-        const response = await ForgotPasswordRequest(data);
-        showSuccess("Instruções serão enviadas para seu email", true)
+        showSuccess("Efetuando o pedido de redefinição", true)
+        try{
+          const response = await ForgotPasswordRequest(data);
+          showSuccess("Instruções serão enviadas para seu email", true)
+
+        }catch{
+          showError("Erro no pedido de redefinição de senha", true)
+        }
       }
     } catch (error: any) {
         showError("Erro ao enviar email", true)
@@ -49,7 +55,7 @@ const ForgotPassoword = () => {
         <ToastContainer/>
       <div className={style.container}>
         <div className={style.title}>
-          <h1>Recuperação de Senhas</h1>
+          <h1>Recuperação de Senha</h1>
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
         <div className={style.input}>
