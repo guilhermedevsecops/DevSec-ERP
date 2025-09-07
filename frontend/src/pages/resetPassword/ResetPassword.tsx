@@ -43,7 +43,7 @@ const ResetPassword = () => {
 
     if (!token) {
         showError("Token de autorização vazio", true);
-        return; // impede envio sem token
+        return;
     }
 
     const payload: ResetPasswordForm = {
@@ -51,15 +51,15 @@ const ResetPassword = () => {
         token: token 
     };
 
-    console.log("=============", payload);
-
     try {
         if (data.password === "") {
             showError("A senha não pode ser vazia", true);
         } else {
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+            showSuccess("Efetuando troca de senha por favor aguarde", true);
             const response = await ResetPassordRequired(payload);
             showSuccess("Senha alterada com sucesso", true);
-            //navigate(PathRoutes.commonPath.login)
+            navigate(PathRoutes.commonPath.login)
         }
     } catch {
         showError("Erro ao alterar a senha", true);
@@ -87,7 +87,7 @@ return (
         <div className={style.buttons}>
         <div>
           <Button variant="contained" type="submit">
-            Enviar email
+            Trocar Senha
           </Button>
         </div>
         <div>
