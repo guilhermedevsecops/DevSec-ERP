@@ -86,9 +86,12 @@ const Login = () => {
 
       if (response?.token) {
         dispatch(setToken(response.token));
+        localStorage.setItem("token", response.token);
+        /*Ativar quando for utilizar permissões
+        localStorage.setItem("roles", JSON.stringify(reponse.roles || []));*/
         showSuccess("Entrando na Home Page!", true);
         await new Promise((resolve) => setTimeout(resolve, 5000));
-        navigate("/home");
+        navigate(PathRoutes.protectedPath.home);
       } else {
         showError("Email ou senha inválidos", true);
       }

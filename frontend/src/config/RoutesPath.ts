@@ -4,7 +4,8 @@ const PathRoutes = {
         registration : "/registration",
         notFound : "*",
         forgotPassword: "/forgot-password",
-        resetPassword: "/reset-password/:token"
+        resetPassword: "/reset-password/:token",
+        unauthorized : "/unauthorized"
     },
 
     protectedPath: {

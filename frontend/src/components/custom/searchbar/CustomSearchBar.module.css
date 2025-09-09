@@ -1,0 +1,11 @@
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  width: 50rem;
+  background-color: white;
+}
+
+.searchIcon {
+  margin-right: 0.5rem;
+  color: #4caf50;
+}
