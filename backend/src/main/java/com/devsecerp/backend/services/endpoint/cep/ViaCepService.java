@@ -1,4 +1,4 @@
-package com.devsecerp.backend.services.cep;
+package com.devsecerp.backend.services.endpoint.cep;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
