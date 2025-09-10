@@ -51,7 +51,7 @@ public class ClimaTempoService {
         resp.setClima(clima);
         resp.setCidade(cidade);
         resp.setDia(dia);
-        resp.setMes(diaMesAno);
+        resp.setDiaMesAno(diaMesAno);
 
         return resp;
 

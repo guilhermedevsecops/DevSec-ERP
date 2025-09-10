@@ -11,7 +11,6 @@ public class ClimaTempoResponse {
     private String clima;
     private String cidade;
     private String dia;
-    private String mes;
-    private int ano;
+    private String diaMesAno;
     
 }
