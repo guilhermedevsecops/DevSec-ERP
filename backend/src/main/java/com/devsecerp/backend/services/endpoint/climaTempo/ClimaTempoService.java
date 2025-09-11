@@ -1,9 +1,13 @@
 package com.devsecerp.backend.services.endpoint.climaTempo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -13,7 +17,7 @@ import com.devsecerp.backend.dto.climaTempo.ClimaTempoResponse;
 
 @Service
 public class ClimaTempoService {
-    
+
     @Value("${ipapi.url}")
     private String ipApiUrl;
 
@@ -22,17 +26,32 @@ public class ClimaTempoService {
 
     @Value("${openweather.api.key}")
     private String openWeatherApiKey;
+    
+    private final WebClient webClient;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    public ClimaTempoService() {
+        this.webClient = WebClient.builder()
+                .build();
+    }
 
-    public ClimaTempoResponse buscarClima(){
-        Map<String, Object> ipApiResponse = restTemplate.getForObject(ipApiUrl, Map.class);
+    public ClimaTempoResponse buscarClima() {
+         Map<String, Object> ipApiResponse = webClient.get()
+                .uri(ipApiUrl)
+                .retrieve()
+                .bodyToMono(Map.class)
+                .block(Duration.ofSeconds(10));
+
         String cidade = (String) ipApiResponse.get("city");
-        Object lat = ipApiResponse.get("latitude");
-        Object lon = ipApiResponse.get("longitude");
+        Double lat = ((Number) ipApiResponse.get("latitude")).doubleValue();
+        Double lon = ((Number) ipApiResponse.get("longitude")).doubleValue();
 
         String urlClima = String.format(openWeatherUrl, lat, lon, openWeatherApiKey);
-        Map<String, Object> climaApiResponse = restTemplate.getForObject(urlClima, Map.class);
+
+        Map<String, Object> climaApiResponse = webClient.get()
+                .uri(urlClima)
+                .retrieve()
+                .bodyToMono(Map.class)
+                .block(Duration.ofSeconds(10));
 
         Map<String, Object> main = (Map<String, Object>) climaApiResponse.get("main");
         Double temperatura = (Double) main.get("temp");
@@ -40,12 +59,12 @@ public class ClimaTempoService {
         var weatherList = (List<Map<String, Object>>) climaApiResponse.get("weather");
         String clima = (String) weatherList.get(0).get("description");
 
-        // fazer data formatada pegando dia da semana 
+        // fazer data formatada pegando dia da semana
         LocalDateTime agora = LocalDateTime.now();
         String dia = agora.format(DateTimeFormatter.ofPattern("EEE", new Locale("pt", "BR")));
         String diaMesAno = agora.format(DateTimeFormatter.ofPattern("dd-MM-YY"));
 
-        //Montagem do JSON
+        // Montagem do JSON
         ClimaTempoResponse resp = new ClimaTempoResponse();
         resp.setTemperatura(Math.round(temperatura) + "°");
         resp.setClima(clima);
@@ -53,8 +72,9 @@ public class ClimaTempoService {
         resp.setDia(dia);
         resp.setDiaMesAno(diaMesAno);
 
+        System.out.println(resp);
+
         return resp;
 
-        
     }
 }
