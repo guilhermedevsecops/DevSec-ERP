@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import PathRoutes from '../../config/RoutesPath'
 import style from './LayoutSite.module.css';
@@ -16,12 +16,32 @@ import Backups from '../../assets/icons/homepage/Backups.png'
 import UserAdd from '../../assets/icons/homepage/Adduser.png'
 import OS from '../../assets/icons/homepage/AberturaChamado.png'
 import CustomSearchBar from '../../components/custom/searchbar/CustomSearchBar';
+import { ApiClimaTempo } from '../../services/ApiClimaTempo/ApiClimaTempo';
+
+interface ClimaTempoApi{
+  temperatura : string, 
+  clima       : string,
+  cidade      : string,
+  dia         : string,
+  diaMesAno   : string
+}
 
 const LayoutSite = () => {
+
+  const getApiClimaTempo = async() => {
+    const clima = await ApiClimaTempo();
+    console.log(clima);
+  }
 
   const handleSearch = (query : string) => {
     console.log("Estou Buscando por ...")
   }
+
+  useEffect(() => {
+  getApiClimaTempo()  
+  
+  }, [])
+  
 
   return (
     <div className={style.containerSite}>
