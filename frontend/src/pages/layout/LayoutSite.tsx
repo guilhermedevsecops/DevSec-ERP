@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
 import PathRoutes from '../../config/RoutesPath'
 import style from './LayoutSite.module.css';
@@ -9,7 +9,8 @@ import Logout from '../../assets/icons/homepage/Exit.png'
 import Note from '../../assets/icons/homepage/adicionar.png'
 import TodoList from '../../assets/icons/homepage/ToDoList.png'
 import Sun from '../../assets/icons/homepage/Clima.png'
-import Moon from '../../assets/icons/homepage/Moon.png'
+import Clouds from '../../assets/icons/homepage/Clouds.svg'
+import Wet from '../../assets/icons/homepage/Wet.svg'
 import Rain from '../../assets/icons/homepage/Rain.png'
 import Security from '../../assets/icons/homepage/Security.png'
 import Backups from '../../assets/icons/homepage/Backups.png'
@@ -30,17 +31,20 @@ const LayoutSite = () => {
 
   const getApiClimaTempo = async() => {
     const clima = await ApiClimaTempo();
-    console.log(clima);
+    return clima;
   }
 
   const handleSearch = (query : string) => {
     console.log("Estou Buscando por ...")
   }
 
+  const [clima, setClima] = useState<ClimaTempoApi | null>(null);
+
   useEffect(() => {
-  getApiClimaTempo()  
-  
-  }, [])
+   getApiClimaTempo()
+    .then(dataApi => setClima(dataApi))
+    .catch(error => console.error(error));
+}, []);
   
 
   return (
@@ -59,12 +63,17 @@ const LayoutSite = () => {
         </div>
         <div className={style.column}>
           <div className={style.climateIconAndTemp}>
-            <p>25°</p>
-            <img src={Rain} alt="Chuva"/>{/*esse icone vai mudar para sol noite de acordo com retorno api*/}
+            <p>{clima?.temperatura}</p>
+            <img 
+              src={clima?.clima === "chuva" ? Rain :
+                clima?.clima === "nublado" ? Clouds:
+                clima?.clima === "chuva forte" ? Wet:
+                clima?.clima === "céu limpo" ? Sun : Sun 
+              } alt="tempo"/>
           </div>
           <div className={style.cityDate}>
-              <p className={style.cityName}>Goiânia</p>{/*Nome da Cidade deve ser alterada de acordo com retorno da api*/}
-              <p className={style.daysAndYear}>Terça-Feira 2025</p>{/*Dia da semana e ano deve mudar de acordo com a api*/}
+              <p className={style.cityName}>{clima?.cidade}</p>
+              <p className={style.daysAndYear}> {`${clima?.dia} ${clima?.diaMesAno}`}</p>
   </div>
 </div>
        
