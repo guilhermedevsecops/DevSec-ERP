@@ -26,7 +26,6 @@ public class EndpointsController {
     @GetMapping("/cep/{cep}")
     public CepResponse getCep(@PathVariable String cep) {
         String url = apiConfigService.getUrl("ViaCEP", cep + "/json/");
-        System.out.println(url);
         return restTemplate.getForObject(url, CepResponse.class);
     }
 
